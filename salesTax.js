@@ -98,6 +98,39 @@ app.get("/get-product/:Product",function(req,res){
     })
 })
 
+app.get("/product-price-and-bill",function(req,res){
+    knex.select("Product","Price","Tax","Total_price").from("products").then((result)=>{
+        tax_list=[], price_list=[], total_list=[], product=[]
+
+        for (i of result){
+            product.push(i["Product"])
+            tax_list.push(i["Tax"])
+            price_list.push(i["Price"])
+            total_list.push(i["Total_price"])
+        }
+        countPrice=0, list=[] ,tax=0, price = 0, grand_obj={}
+
+        for (var i=0; (i<tax_list.length); i++){
+            products={}
+            products.product=product[i]
+            products.price=price_list[i]
+            products.tax=tax_list[i]
+            products.total_price=total_list[i]
+            countPrice=countPrice+total_list[i]
+            price=price+price_list[i]
+            tax=tax+tax_list[i]
+            list.push(products)
+        }grand_obj.total_price=price
+        grand_obj.total_tax=tax
+        grand_obj.totalBill=countPrice
+        list.push(grand_obj)
+        res.send(list)
+    
+    }).catch((err)=>{
+        res.send("their is something wrong")
+    })
+})
+
 
 app.listen(8000,() =>{
     console.log("listining 8000 ")
