@@ -60,6 +60,43 @@ app.post("/add-products",function(req,res){
 })
 
 
+app.get("/get-product/:Product",function(req,res){
+    knex.select("Product","Price","Tax","Total_price").from("products").then((result)=>{
+        tax_list=[]
+        price_list=[]
+        total_list=[]
+        product=[]
+        var total_bill=0
+        for (i of result){
+            product.push(i["Product"])
+            tax_list.push(i["Tax"])
+            price_list.push(i["Price"])
+            // total_list.push(i["Total_price"])
+            total_bill=total_bill+i["Total_price"]
+
+        }
+        list=[]
+        data={}
+
+        for (var i=0; (i<tax_list.length); i++){
+            if(product[i] === req.params.Product){
+                data.product=product[i]
+                data.price=price_list[i]
+                data.tax=tax_list[i]
+                data.total_price=total_list[i]
+                // count=count+total_list[i]
+                list.push(data)
+
+            }
+        }data.grand_total=total_bill
+        list.push(data)
+        res.send(list)
+        
+
+    }).catch((err)=>{
+        res.send("their is something wrong")
+    })
+})
 
 
 app.listen(8000,() =>{
