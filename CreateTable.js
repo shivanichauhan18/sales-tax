@@ -10,14 +10,12 @@ const options = {
 
 const knex = require('knex')(options);
 
-knex.schema.createTable('productBill', (table) => {
+knex.schema.createTable('product', (table) => {
     table.increments('No')
     table.string('Product')
     table.string('imported')
     table.string('category')
     table.float('Price')
-    table.float('Tax')
-    table.float('TotalPrice')
 }).then(() => console.log("table created"))
     .catch((err) => { console.log(err); throw err })
     .finally(() => {

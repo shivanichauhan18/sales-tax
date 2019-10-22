@@ -1,9 +1,8 @@
-// knex = require("./connection.js")
+knex = require("./connection.js")
 var products = require("./calculate.js")
 var express = require('express');
 var app = express();
 app.use(express.json());
-
 var router=express.Router()
 
 
