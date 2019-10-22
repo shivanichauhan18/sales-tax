@@ -9,7 +9,7 @@ function getTax(price,tax){
     return price*tax/100
 }
 
-app.post("/add_products1",function(req,res){
+app.post("/post",function(req,res){
     categoreis=["book","food","medicine"]
     productDetails={"Product":req.body.Product,"imported":req.body.imported,"category":req.body.category,"Price":req.body.Price}
 
