@@ -1,27 +1,37 @@
 // var products = require("./calculate.js")
 
 connectDb=require("../model/connectDb")
-
 var express = require('express');
 var app = express();
 
-var router=express.Router()
-router.use(express.json());
+var Product=express.Router()
+Product.use(express.json());
 
 
-router.post("/addProduct",(req,res)=>{
+Product.post("/addProduct",(req,res)=>{
     productDetails={"Product":req.body.Product,"imported":req.body.imported,"category":req.body.category,"Price":req.body.Price}
-
     data=productDetails.imported.toString()
     productDetails.imported=data
-    
+
     response=connectDb(productDetails)
-    res.json({ success: true, message: 'ok' });
-})
+    response.then((data)=>{
+        res.json(data)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+    }).catch((err)=>{
+        res.send(err)
+    })
+});
 
 
+Product.get("/add_item_in_cart/:name",(req,res)=>{                                                                                                                                                                                                                                                                                                                                                                                                   
+    name=req.params.name
+    products=connectDb.selectData(name)
+    products.then((data)=>{
+        price=data[0].Price
+        res.json(price)
+    }).catch((err)=>{
+        res.send(err)
+    })
+});
 
 
-
-
-module.exports=router
+module.exports=Product
