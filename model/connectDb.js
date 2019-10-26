@@ -7,12 +7,9 @@ insertData=(data)=>{
 
 };
   
-
-
-
-var selectData=(product)=>{
+var selectData=()=>{
     return knex.select("*")
-        .from("product").where("Product",product)
+        .from("product")
 }
 
 module.exports={insertData,selectData}

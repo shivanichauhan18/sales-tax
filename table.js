@@ -10,18 +10,34 @@ const options = {
 
 const knex = require('knex')(options);
 
-knex.schema.createTable('product', (table) => {
-    table.increments('No')
+knex.schema.createTable('cart', (table) => {
+    table.integer('No')
     table.string('Product')
     table.string('imported')
     table.string('category')
     table.float('Price')
+    table.float('q')
+    table.float("quantityPrice")
 }).then(() => console.log("table created"))
     .catch((err) => { console.log(err); throw err })
     .finally(() => {
         knex.destroy();
     });
 
+
+    cart.get("/produts",(req,res)=>{
+
+        var cartProduts=cartDb.getData()
+        cartProduts.then((productsD)=>{
+            var productDetails=products(productsD[0])
+    
+            // data=ProDetail(productsD)
+            res.json(productDetails)
+        }).catch((err)=>{
+            console.log(err)
+            res.send(err)
+        })
+    });
 
 // app.get("/get_price",function(req,res){
 //     for (var i=1; (i<14); i++){
