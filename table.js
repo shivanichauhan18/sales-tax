@@ -25,19 +25,7 @@ knex.schema.createTable('cart', (table) => {
     });
 
 
-    cart.get("/produts",(req,res)=>{
-
-        var cartProduts=cartDb.getData()
-        cartProduts.then((productsD)=>{
-            var productDetails=products(productsD[0])
     
-            // data=ProDetail(productsD)
-            res.json(productDetails)
-        }).catch((err)=>{
-            console.log(err)
-            res.send(err)
-        })
-    });
 
 // app.get("/get_price",function(req,res){
 //     for (var i=1; (i<14); i++){
