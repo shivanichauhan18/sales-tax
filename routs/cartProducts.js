@@ -11,12 +11,11 @@ function ProDetail(product){
     var totalPro={};
     var productWithTa=[];
     for (var i=0;  i<product.length; i++){
-
         var productDetails=products(product[i])
         tax=tax+productDetails["Tax"]
-        price=price+productDetails["Price"]
-
+        price=price+productDetails["quantityPrice"]
         productWithTa.push(productDetails)
+
     }totalPro["totalBill"]=price
     totalPro["totalTax"]=tax
     productWithTa.push(totalPro);
@@ -33,7 +32,7 @@ cart.get("/:name/:quantity",(req,res)=>{
         inserting=cartDb.insertion(data[0],qua,id)
         return inserting
         }).then((result)=>{
-            res.json(result)
+            res.json("data inserted")
         })
         .catch((err)=>{
             res.send(err)
@@ -41,13 +40,12 @@ cart.get("/:name/:quantity",(req,res)=>{
 }); 
 
 cart.get("/produts",(req,res)=>{
-
     var cartProduts=cartDb.getData()
     cartProduts.then((productsD)=>{
-        var productDetails=products(productsD[0])
+        // var productDetails=products(productsD[0])
 
-        // data=ProDetail(productsD)
-        res.json(productDetails)
+    data=ProDetail(productsD)
+    res.json(data)
     }).catch((err)=>{
         console.log(err)
         res.send(err)
