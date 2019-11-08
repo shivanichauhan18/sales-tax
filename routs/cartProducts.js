@@ -26,10 +26,11 @@ function ProDetail(product){
 cart.get("/:name/:quantity",(req,res)=>{
         var qua=req.params.quantity                                                                                                                                                                                                                                                                                                                                                                                         
         var name=req.params.name
-        id=req.body.No
+        id=req.body.id
         products=cartDb.selectData(name)
         products.then((data)=>{
         inserting=cartDb.insertion(data[0],qua,id)
+        // res.json("data")
         return inserting
         }).then((result)=>{
             res.json("data inserted")
@@ -42,8 +43,6 @@ cart.get("/:name/:quantity",(req,res)=>{
 cart.get("/produts",(req,res)=>{
     var cartProduts=cartDb.getData()
     cartProduts.then((productsD)=>{
-        // var productDetails=products(productsD[0])
-
     data=ProDetail(productsD)
     res.json(data)
     }).catch((err)=>{
@@ -51,5 +50,29 @@ cart.get("/produts",(req,res)=>{
         res.send(err)
     })
 });
+
+cart.get("/:id",(req,res)=>{
+    var id=req.params.id
+    var data = cartDb.selectProduct(id)
+    data.then((response)=>{
+        res.json(response)
+    }).catch((err)=>{
+        console.log(err)
+        res.send(err)
+    })
+
+})
+
+cart.get("/product_by_order",(req,res)=>{
+    // name=req.params.name
+    var product=cartDb.productByOrder()
+    product.then((data)=>{
+        res.json(data)  
+    }).catch((err)=>{
+        console.log(err)
+        res.send(err)
+    })
+})
+
 
 module.exports=cart

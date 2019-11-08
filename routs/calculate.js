@@ -3,14 +3,13 @@ function getTax(price,tax){
 }
 
 
-
 let salesTax = (product)=>{
-    categoreis=["book","food","medicine"]
+    categories=["book","food","medicine"]
     var tax=0.0
     if(product.imported){
         tax=tax+getTax(product["quantityPrice"],5)
 
-    }if(!categoreis.includes(product["category"])){
+    }if(!categories.includes(product["category"])){
         tax=tax+getTax(product["quantityPrice"],10)
     }
 
@@ -19,3 +18,4 @@ let salesTax = (product)=>{
     return product;
 }
 module.exports=salesTax
+

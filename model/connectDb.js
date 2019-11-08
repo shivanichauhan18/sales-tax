@@ -2,8 +2,8 @@ knex = require("./connection.js")
 
 
 insertData=(data)=>{
-    knex('product').insert(data)
-    return { success: true, message: 'ok' }
+    return knex('product').insert(data)
+    // return { success: true, message: 'ok' }
 
 };
   
