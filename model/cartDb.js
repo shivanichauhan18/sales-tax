@@ -1,6 +1,5 @@
 knex = require("./connection.js")
 
-
 var selectData=(name)=>{
     return knex.select("*")
         .from("product").where("Product",name)
@@ -12,7 +11,6 @@ var insertion=(data,q,id)=>{
     price=data["Price"]*q
     data["quantityPrice"]=price
     return knex("cart").insert(data)
-
 }
 
 var getData=((id)=>{

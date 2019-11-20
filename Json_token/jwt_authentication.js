@@ -1,7 +1,8 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 let jwt = require('jsonwebtoken');
 var app = express();
+
 
 app.post('/api/posts',verifyToken,(req,res,next)=>{
     jwt.verify((req.token),"SECRET_KEY",(err,authData)=>{
@@ -19,8 +20,8 @@ app.post('/api/posts',verifyToken,(req,res,next)=>{
 app.post("/login",(req,res,next)=>{
     const user={
         id:1,
-        name:"shivani",
-        email:"shivanic18@navgurukul.org"
+        name:"shivani chouhan",
+        email:"shivanic1022@navgurukul.org"
     }
     jwt.sign(user,"SECRET_KEY",(err,token)=>{
         res.json({

@@ -5,6 +5,8 @@ var tax=require("./routs/product")
 
 var cart=require("./routs/cartProducts")
 
+app.use('/', (req, res) => res.send('OK'));
+
 app.use("/routs/product",tax)
 
 app.use("/routs/cartProducts",cart)
