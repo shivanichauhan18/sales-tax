@@ -1,4 +1,3 @@
-var uuid = require('uuid');
 var nJwt = require('njwt');
 
 var claims = {
